@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ recipe.title }}</h2>
+
+<p><strong>Описание:</strong> {{ recipe.description }}</p>
+<p><strong>Шаги приготовления:</strong> {{ recipe.steps }}</p>
+<p><strong>Время приготовления:</strong> {{ recipe.cooking_time }} минут</p>
+
+{% if recipe.image %}
+<img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+{% endif %}
+
+<p><strong>Категории:</strong>
+    {% for category in recipe.category.all %}
+    {{ category.name }}
+    {% if not forloop.last %}, {% endif %}
+    {% endfor %}
+</p>
+
+<p><strong>Автор:</strong> {{ recipe.author.username }}</p>
+{% endblock %}
