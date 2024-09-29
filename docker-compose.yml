@@ -1,0 +1,16 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: ./
+      dockerfile: ./recipe_site/Dockerfile
+    volumes:
+      - ./recipe_site:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=recipe_site.settings
+    command: python manage.py runserver 0.0.0.0:8000

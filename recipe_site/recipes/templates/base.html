@@ -7,7 +7,37 @@
 
     <!-- Materialize CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Подключение Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* Дополнительные стили для футера */
+        footer {
+            background-color: #263238; /* Цвет футера */
+            color: #ffffff; /* Цвет текста футера */
+            padding: 20px 0; /* Отступы */
+            text-align: center; /* Центрирование текста */
+            margin-top: 50px; /* Отступы */
+        }
+
+
+
+        .pagination .waves-effect a {
+            color: #0d47a1;
+        }
+
+        .pagination .active {
+            background-color: #0d47a1;
+            color: white;
+        }
+
+
+    </style>
 </head>
 <body>
 
@@ -21,7 +51,10 @@
                 <li><a href="{% url 'home' %}">Главная</a></li>
                 <li><a href="{% url 'add_recipe' %}">Добавить рецепт</a></li>
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'logout' %}">Выйти</a></li>
+                <li><form action="{% url 'logout' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="background: none; border: none; color: inherit; cursor: pointer;">Выйти</button>
+                </form></li>
                 {% else %}
                 <li><a href="{% url 'login' %}">Войти</a></li>
                 <li><a href="{% url 'register' %}">Регистрация</a></li>
@@ -47,6 +80,13 @@
     {% block content %}{% endblock %}
 </main>
 
+<!-- Футер -->
+<footer>
+    <div class="container">
+        <p>Сделано для GB</p>
+    </div>
+</footer>
+
 <!-- Materialize JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
@@ -60,6 +100,10 @@
     document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('select');
         var instances = M.FormSelect.init(elems);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        M.updateTextFields();
     });
 </script>
 

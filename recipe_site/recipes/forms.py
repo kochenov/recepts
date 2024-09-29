@@ -1,8 +1,10 @@
 from django import forms
 from .models import Recipe, Category
 
+
 class RecipeForm(forms.ModelForm):
-    new_category = forms.CharField(required=False, label="Новая категория", help_text="Добавьте новую категорию, если её ещё нет")
+    new_category = forms.CharField(required=False, label="Новая категория",
+                                   help_text="Добавьте новую категорию, если её ещё нет")
     category = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), required=False, label="Категория")
 
     class Meta:

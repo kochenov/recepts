@@ -1,10 +1,46 @@
 {% extends 'base.html' %}
+{% load extras %}
 
 {% block content %}
 <h2>Регистрация</h2>
-<form method="post">
+<form method="post" class="col s12">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Зарегистрироваться</button>
+    <div class="row">
+        <div class="input-field col s12">
+            {{ form.username.label_tag }}
+            {{ form.username|add_class:"validate" }}
+            {% if form.username.errors %}
+            <span class="helper-text red-text" data-error="wrong" data-success="right">
+                    {{ form.username.errors.0 }}
+                </span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12">
+            {{ form.password1.label_tag }}
+            {{ form.password1|add_class:"validate" }}
+            {% if form.password1.errors %}
+            <span class="helper-text red-text" data-error="wrong" data-success="right">
+                    {{ form.password1.errors.0 }}
+                </span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12">
+            {{ form.password2.label_tag }}
+            {{ form.password2|add_class:"validate" }}
+            {% if form.password2.errors %}
+            <span class="helper-text red-text" data-error="wrong" data-success="right">
+                    {{ form.password2.errors.0 }}
+                </span>
+            {% endif %}
+        </div>
+    </div>
+
+    <button type="submit" class="btn waves-effect waves-light">Зарегистрироваться</button>
 </form>
 {% endblock %}

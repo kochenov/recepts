@@ -1,22 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>{{ recipe.title }}</h2>
+<div class="container">
+    <h2 class="header center-align">{{ recipe.title }}</h2>
 
-<p><strong>Описание:</strong> {{ recipe.description }}</p>
-<p><strong>Шаги приготовления:</strong> {{ recipe.steps }}</p>
-<p><strong>Время приготовления:</strong> {{ recipe.cooking_time }} минут</p>
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title" style="font-size: 1.5rem; font-weight: 600;">Описание</span>
+            <p style="font-size: 1rem;">{{ recipe.description }}</p>
 
-{% if recipe.image %}
-<img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
-{% endif %}
+            <span class="card-title" style="font-size: 1.5rem; font-weight: 600;">Шаги приготовления</span>
+            <p style="font-size: 1rem;">{{ recipe.steps }}</p>
 
-<p><strong>Категории:</strong>
-    {% for category in recipe.category.all %}
-    {{ category.name }}
-    {% if not forloop.last %}, {% endif %}
-    {% endfor %}
-</p>
+            <span class="card-title" style="font-size: 1.5rem; font-weight: 600;">Время приготовления</span>
+            <p style="font-size: 1rem;"><strong>{{ recipe.cooking_time }}</strong> минут</p>
 
-<p><strong>Автор:</strong> {{ recipe.author.username }}</p>
+            {% if recipe.image %}
+            <div class="center">
+                <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" class="responsive-img" style="max-height: 400px; object-fit: cover;">
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="card-action">
+            <span><strong>Категории:</strong>
+                {% for category in recipe.category.all %}
+                    <span class="">{{ category.name }}</span>
+                    {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </span>
+            <span class="right" style="font-weight: 600;"><strong>Автор:</strong> {{ recipe.author.username }}</span>
+
+        </div>
+    </div>
+
+    <div class="center">
+        <a href="{% url 'add_recipe' %}" class="btn waves-effect waves-light">Добавить новый рецепт</a>
+        <a href="{% url 'edit_recipe' recipe.pk %}" class="btn waves-effect waves-light">Редактировать рецепт</a>
+        <a href="{% url 'home' %}" class="btn waves-effect waves-light">Вернуться на главную</a>
+    </div>
+</div>
 {% endblock %}
