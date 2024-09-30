@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-=di@x8jc+7!t(y6=n633d*5wqzfz(+x(a_%y8xkl3irw@04%qx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["kochenov.ru"]
+ALLOWED_HOSTS = ["kochenov.ru", "localhost"]
 
 
 # Application definition
@@ -133,3 +133,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 LOGIN_URL = '/login/'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://kochenov.ru',
+    'https://www.kochenov.ru',
+]
