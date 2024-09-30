@@ -14,7 +14,7 @@ services:
   nginx:
     image: nginx:alpine
     ports:
-      - 8080:80
+      - 80:80
       - 443:443
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
@@ -22,10 +22,3 @@ services:
       - ./var/www/certbot:/var/www/certbot  # Убедитесь, что путь правильный
     depends_on:
       - web
-
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - /etc/letsencrypt:/etc/letsencrypt
-      - ./var/www/certbot:/var/www/certbot  # Обновите путь
-    command: certonly --webroot --webroot-path=/var/www/certbot --email kochenof@yandex.ru --agree-tos --no-eff-email -d kochenov.ru -d www.kochenov.ru
